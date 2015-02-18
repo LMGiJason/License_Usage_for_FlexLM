@@ -1,0 +1,6 @@
+﻿#This file defines the source and destination for custom license files.
+#License files stored in the Sourcefolder location will be offered to you in a listbox.
+#After making a selection you can apply that license to the destination folder location.
+#The file will be automatically renamed to selicense.dat when copied.
+Sourcefolder=Z:\temp\SELicense
+DestinationFolder=Z:\Program Files\Solid Edge ST7\Preferences
