@@ -12,6 +12,7 @@ Public Class frmLicenseUsage
     Private WithEvents fileMan As New FileManager
     Private mSourceLicenseFolder As String
     Private mDestLicenseFolder As String
+    Private mDestLicenseFile As String
     Private mFilterWasApplied As Boolean = False
     Private mHOST_NOT_FOUND As Boolean
     Private mServersFile As String
@@ -71,6 +72,7 @@ Public Class frmLicenseUsage
         Dim oneVal As String
 
         Try
+            mDestLicenseFile = "SELicense.dat"
             If File.Exists(licdatfl) Then
                 lines = File.ReadAllLines(licdatfl)
 
@@ -93,6 +95,14 @@ Public Class frmLicenseUsage
                         If data.Length = 2 Then
                             oneVal = data(1).Trim
                             mDestLicenseFolder = oneVal
+                        End If
+                    End If
+
+                    If oneLine.StartsWith("DestLicenseFile") Then
+                        Dim data() As String = oneLine.Split("=")
+                        If data.Length = 2 Then
+                            oneVal = data(1).Trim
+                            mDestLicenseFile = oneVal
                         End If
                     End If
                 Next
@@ -121,7 +131,7 @@ Public Class frmLicenseUsage
         Try
             If cboLicenses.SelectedItem IsNot Nothing Then
                 Dim thesrcFile As String = Path.Combine(mSourceLicenseFolder, cboLicenses.SelectedItem)
-                Dim thedestFile As String = Path.Combine(mDestLicenseFolder, "selicense.dat")
+                Dim thedestFile As String = Path.Combine(mDestLicenseFolder, mDestLicenseFile)
                 File.Copy(thesrcFile, thedestFile, True)
             End If
         Catch ex As Exception
@@ -269,14 +279,14 @@ Public Class frmLicenseUsage
             If svr.Contains("@") Then
                 mOutputFile = Path.Combine(mCurrentFolder, svr.Trim & "_Output.txt")
                 If GenerateBatAndOutput(svr.Trim) Then
-                    PopulateList(svr)
+                    PopulateListFromOutputFile(svr)
                 End If
             End If
         Next
         If mFilterWasApplied Then ApplyFilter()
     End Function
 
-    Private Sub PopulateList(svr As String)
+    Private Sub PopulateListFromOutputFile(svr As String)
         tvStatus.Nodes.Clear()
         mServerNode = New TreeNode(svr)
         tvStatus.Nodes.Add(mServerNode)
