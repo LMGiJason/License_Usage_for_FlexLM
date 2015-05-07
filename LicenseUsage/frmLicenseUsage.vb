@@ -287,7 +287,7 @@ Public Class frmLicenseUsage
     End Function
 
     Private Sub PopulateListFromOutputFile(svr As String)
-        tvStatus.Nodes.Clear()
+        'tvStatus.Nodes.Clear() caused only the last server to be processed
         mServerNode = New TreeNode(svr)
         tvStatus.Nodes.Add(mServerNode)
         AddServerData()
