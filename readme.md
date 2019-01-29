@@ -8,3 +8,4 @@
     * Creates a csv file that can be graphed with Excel.
     * Works with Siemens NX and Siemens Solid Edge licensing. 
 
+![Sample](https://github.com/LMGiJason/License_Usage_for_FlexLM/blob/master/LicenseUsage.PNG)
