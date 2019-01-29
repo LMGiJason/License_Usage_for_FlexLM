@@ -1,4 +1,4 @@
-# License Usage for FlexLM          [LMGi](www.tlmgi.com)
+# License Usage for FlexLM          www.tlmgi.com
 ### Description:
 ### Provides a friendly user interface for the lmutil.exe utility provided with FlexLM licensing software.
 
